@@ -1,0 +1,22 @@
+pyXMPPpipeREPL (latest as of 04 Jan 2010)
+-----------------------------------------
+
+  This work is licensed under the GPLv3.
+
+  pyXMPPpipeREPL is a python module which allows shell-like access to command-line applications over XMPP. The module contains the XMPP_REPL class and the startXMPP_REPL helper function. An instance of XMPP_REPL logs into an XMPP account and starts a subprocess. Incoming messages are forwarded to the standard input of the subprocess and the standard output of the subprocess is sent as XMPP messages to a designated account. This allows remote operation of shells and REPLs over IM.
+
+Dependencies
+  pyXMPPpipeREPL uses the xmpppy module and it must be installed in order for pyXMPPpipeREPL to work. xmpppy also requires that either pydns or dnspython be installed.
+
+Usage
+  The easiest way to use pyXMPPpipeREPL is by using the helper function which creates, sets up, and starts an instance of XMPP_REPL:
+
+  import pyXMPPpipeREPL
+
+  pyXMPPpipeREPL.startXMPP_REPL(["/bin/bash"], "incomingaccount@gmail.com", "incomingAccountPassword", "outgoingaccount@gmail.com")
+  
+  The first parameter is a tuple passed as input to subprocess.Popen. The second parameter is the incoming XMPP account. Messages sent to this account will be forwarded to the standard input of the subprocess. The third parameter is the password for the incoming XMPP account. The fourth parameter is the XMPP account to forward standard output to.
+
+  As a security precaution, instances of XMPP_REPL will only accept messages that come from the XMPP account that the instance is forwarding output to. This can be easily changed in the receivedMessage function of XMPP_REPL if necessary.
+
+  This module has only been tested on Windows and Linux.
