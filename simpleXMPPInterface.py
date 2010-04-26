@@ -30,8 +30,9 @@ class xmppInterface():
         
     def receivedMessage(self, conn, msg):
         messageSender = str(msg.getFrom())
+        messageBody = msg.getBody()
         messageContents = str(msg.getBody())
-        if (not messageContents == None and not messageContents == "" and not self.incomingMessageHandler == None):
+        if (not messageBody == None and not messageContents == "" and not self.incomingMessageHandler == None):
             self.incomingMessageHandler.receivedMessage(messageSender, messageContents)
         
     def sendMessage(self, recipient, msg):

@@ -64,6 +64,7 @@ class XMPP_REPL():
     pipeReaderOut = None
     pipeReaderErr = None
     remoteUsername = ""
+    printMessages = True
     
     def startREPL(self):
         self.replProcess = subprocess.Popen(self.replCommandLine,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
@@ -96,9 +97,13 @@ class XMPP_REPL():
                 pass
 
     def sendMessage(self, messageContents):
+        if self.printMessages:
+            print "Sending: " + messageContents
         self.xmppInstance.sendMessage(self.remoteUsername, messageContents)
         
     def receivedMessage(self, sender, messageContents):
+        if self.printMessages:
+            print "Received from " + sender + ": " + messageContents
         if (sender.startswith(self.remoteUsername) and self.replProcess.returncode == None):
             try:
                 self.replProcess.stdin.write(messageContents + "\n")
