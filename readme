@@ -1,7 +1,7 @@
 pyXMPPpipeREPL
 --------------
 
-  This work is licensed under the GPLv3.
+  This work is licensed under the GPLv3 or any later version.
 
   pyXMPPpipeREPL is a python module which allows shell-like access to command-line applications over XMPP. The module contains the XMPP_REPL class and the startXMPP_REPL helper function. An instance of XMPP_REPL logs into an XMPP account and starts a subprocess. Incoming messages are forwarded to the standard input of the subprocess and the standard output of the subprocess is sent as XMPP messages to a designated account. This allows remote operation of shells and REPLs over IM.
 

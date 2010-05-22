@@ -29,10 +29,13 @@ class xmppInterface():
         return 1
         
     def receivedMessage(self, conn, msg):
+        messageType = msg.getType()
         messageSender = str(msg.getFrom())
         messageBody = msg.getBody()
         messageContents = str(msg.getBody())
-        if (not messageBody == None and not messageContents == "" and not self.incomingMessageHandler == None):
+
+        # If we send a message and no listener is logged in, we may get a bounce error. That should not count as receiving a message.
+        if (not messageType == "error" and not messageBody == None and not messageContents == "" and not self.incomingMessageHandler == None):
             self.incomingMessageHandler.receivedMessage(messageSender, messageContents)
         
     def sendMessage(self, recipient, msg):
